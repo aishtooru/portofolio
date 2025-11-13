@@ -102,7 +102,7 @@ export const expCards = [
     review:
       "Collaborated with team to ensure the project meet the requirements. It's a contract-based projec",
     imgPath: "/images/exp1.png",
-    logoPath: "/images/logo1.png",
+    logoPath: "/images/logos/logo_ummi_circle.png",
     title: "Fullstack Developer",
     date: "June 2024 - December 2024",
     responsibilities: [
@@ -116,7 +116,7 @@ export const expCards = [
     review:
       "Taught several classes in the Informatics Engineering Degree for Calculus and Linear Algebra.",
     imgPath: "/images/exp2.png",
-    logoPath: "/images/logo2.png",
+    logoPath: "/images/logos/logo_ummi_circle.png",
     title: "Lecturer Assistant",
     date: "March 2025 - Present",
     responsibilities: [
@@ -129,7 +129,7 @@ export const expCards = [
     review:
       "Ensured the condition and mantain the laboratory components, as well as managed the classroom usage for non-regular class.",
     imgPath: "/images/exp3.png",
-    logoPath: "/images/logo3.png",
+    logoPath: "/images/logos/logo_kac_circle.png",
     title: "Admin and Laboratory Staff",
     date: "October 2025 - Present",
     responsibilities: [

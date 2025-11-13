@@ -32,7 +32,7 @@ const GlowCardContact = ({ card, children, index }) => {
         card.style.setProperty('--start', angle + 60);
     };
 
-    const iconPrefix = ['github', 'linkedin', 'instagram', 'twitter', 'facebook'].includes(card.contact) ? 'fab' : 'fas';
+    const iconPrefix = ['github', 'linkedin', 'instagram', 'twitter', 'facebook'].includes(card.name) ? 'fab' : 'fas';
 
 
   return (
@@ -41,8 +41,8 @@ const GlowCardContact = ({ card, children, index }) => {
         <div className="glow-contact cursor-pointer" />
         <div className="mb-5 text-center">
             <a href={card.link} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-3 relative">
-            <FontAwesomeIcon icon={[iconPrefix, card.contact]} size="2x" />
-            <p className="text-white-50 text-xl">{card.name}</p>
+            <FontAwesomeIcon icon={[iconPrefix, card.name]} size="2x" />
+            <p className="text-white-50 text-xl">{card.description}</p>
             </a>
         </div>
 

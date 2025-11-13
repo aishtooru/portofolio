@@ -24,21 +24,16 @@ const GlowCardEdu = ({ card, children, index }) => {
   return (
     <div ref={(el) =>(cardRefs.current[index] = el)} onMouseMove={handleMouseMove(index)} className="card card-border timeline-card rounded-xl p-10 mx-2">
         <div className='glow'/>
-        {/* <div>
-            {Array.from({length: 5}, (_,i) => (
-                <img src='/images/star.png' key={i} className='size-5'/>
-            ))}
-        </div> */}
         <div className="mb-5">
-            <h1 className='text-lg'>{card.place}</h1>
+            <h1 className='text-lg'>{card.name}</h1>
             <p className='text-white-50 text-l'>
-                Jurusan: {card.jurusan}
+                Department: {card.department}
             </p>
             <p className='text-white-50 text-l'>
-                Tahun: {card.tahun}
+                Year: {card.start_year} - {card.end_year ?? 'Present'}
             </p>
             <p className='text-white-50 text-l'>
-                Nilai: {card.nilai}
+                {card.score <= 4 ? `IPK: ${card.score}` : `Score: ${card.score}`}
             </p>
         </div>
         {children}

@@ -269,11 +269,11 @@ section {
     @apply flex flex-col md:justify-center items-center xl:gap-5 xl:h-[50vh] overflow-hidden relative z-10 group-hover:cursor-grab;
 
     & p {
-      @apply text-base 2xl:text-2xl pb-5 xl:pb-0 font-semibold text-white-50 text-center;
+      @apply text-sm xl:text-lg pb-5 xl:pb-0 font-semibold text-white-50 text-center w-full;
     }
 
     & h2 {
-      @apply text-2xl 2xl:text-2xl pb-2 xl:pb-0 font-semibold text-white-50 text-center
+      @apply text-lg xl:text-lg pb-2 xl:pb-0 font-semibold text-white-50 text-center
     }
   }
 

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { use, useRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { gsap } from 'gsap'
 import { ScrollTrigger } from 'gsap/ScrollTrigger'
 import { useGSAP } from '@gsap/react';
@@ -38,43 +38,71 @@ const Showcase = () => {
        
     }, []);
 
+      const [project, setProject] = useState([])
+    
+      useEffect(() => {
+          const fetchProject = async () => {
+              try {
+                const data_project = await fetch('/api/project')
+                const response_project = await data_project.json()
+                console.log(response_project.project)
+                setProject(response_project.project)
+              } catch(error) {
+                  console.log(error)
+              }
+          }
+    
+        fetchProject()
+      }, [])
+
   return (
     <div id='work' ref={sectionRef} className='app-showcase'>
         <div className='w-full'>
             <div className='showcaselayout'>
                 {/* Showcase Items Left*/}
+                {/* project 1 */}
+                
+                {project[0] && (
                 <div className="first-project-wrapper" ref={projectRef1}>
                     <div className="image-wrapper">
-                        <img src="/images/project1.png" alt="" />
+                        <img src={project[0].img_path} />
                     </div>
                     <div className="text-content">
-                       <h2>Flashcard Learning App for Smarter Memorization called Cardify</h2>
+                       <a href={project[0].link}>
+                            <h2>{project[0].title}</h2>
+                       </a>
                        <p className='text-white-50 md:text-xl'>
-                        An Android app developed using Kotlin in Android Studio. It features deck and cards management, and interactive memory tests.
+                        {project[0].description}
                        </p>
                     </div>
                 </div>
+                )}
 
                 {/* Showcase Items Right*/}
                 <div className="project-list-wrapper overflow-hidden">
-                    {/* project1 */}
+                    {/* project 2 */}
+                    {project[1] && (
+
                     <div className='project' ref={projectRef2}>
                         <div className='image-wrapper bg-[#ffefdb'>
-                            <img src="/images/project2.png" alt="" />
+                            <img src={project[1].img_path} />
                         </div>
                         <h2>
-                            Agrotourism Information Website — CodeIgniter 3
+                            {project[1].title}
                         </h2>
                     </div>
-                    {/* project2 */}
+                    )}
+                    {/* project 3 */}
+                    {project[2] && (
                      <div className='project' ref={projectRef3}>
                         <div className='image-wrapper bg-[#ffe7eb'>
-                            <img src="/images/project3.png" alt="" />
+                            <img src={project[2].img_path} />
                         </div>
                         <h2>
-                            Hotel Reservation Website — PHP Native
+                            {project[2].title}
                         </h2>
                     </div>
+                    )}
                 </div>
 
 
