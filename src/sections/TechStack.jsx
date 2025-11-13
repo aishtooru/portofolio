@@ -2,11 +2,26 @@
 
 import { useState, useEffect } from 'react'
 import TitleHeader from '../components/TitleHeader'
-import { techStackImgs } from '../constants/index'
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap';
 
 const TechStack = () => {
+
+    const [tech, setTech] = useState([])
+    
+      useEffect(() => {
+          const fetcTech = async () => {
+              try {
+                const data_tech = await fetch('/api/techstack')
+                const response_tech = await data_tech.json()
+                setTech(response_tech.techstack)
+              } catch(error) {
+                  console.log(error)
+              }
+          }
+    
+        fetcTech()
+      }, [])
 
     useGSAP(() => {
         gsap.fromTo('.tech-card', {y: 50, opacity: 0}, {
@@ -20,24 +35,9 @@ const TechStack = () => {
                 start: 'top center'
             }
         })
-    })
+    }, [tech])
 
-    const [tech, setTech] = useState([])
     
-      useEffect(() => {
-          const fetcTech = async () => {
-              try {
-                const data_tech = await fetch('/api/techstack')
-                const response_tech = await data_tech.json()
-                console.log(response_tech.techstack)
-                setTech(response_tech.techstack)
-              } catch(error) {
-                  console.log(error)
-              }
-          }
-    
-        fetcTech()
-      }, [])
 
   return (
     <div id="skills" className="flex-center section-padding">

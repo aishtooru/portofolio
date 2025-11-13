@@ -13,6 +13,21 @@ const Showcase = () => {
     const projectRef2 = useRef(null);
     const projectRef3 = useRef(null);
     
+    const [project, setProject] = useState([])
+    
+      useEffect(() => {
+          const fetchProject = async () => {
+              try {
+                const data_project = await fetch('/api/project')
+                const response_project = await data_project.json()
+                setProject(response_project.project)
+              } catch(error) {
+                  console.log(error)
+              }
+          }
+    
+        fetchProject()
+      }, [])
     
     useGSAP(() => {
         const projects = [projectRef1.current, projectRef2.current, projectRef3.current];
@@ -36,24 +51,8 @@ const Showcase = () => {
     });
 
        
-    }, []);
+    }, [project]);
 
-      const [project, setProject] = useState([])
-    
-      useEffect(() => {
-          const fetchProject = async () => {
-              try {
-                const data_project = await fetch('/api/project')
-                const response_project = await data_project.json()
-                console.log(response_project.project)
-                setProject(response_project.project)
-              } catch(error) {
-                  console.log(error)
-              }
-          }
-    
-        fetchProject()
-      }, [])
 
   return (
     <div id='work' ref={sectionRef} className='app-showcase'>

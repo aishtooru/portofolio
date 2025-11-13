@@ -209,6 +209,32 @@ section {
     @apply relative z-20 cursor-pointer;
   }
 
+  .new-button {
+    @apply px-8 py-4 rounded-lg bg-black-200 flex justify-center items-center relative cursor-pointer overflow-hidden;
+    @apply text-white font-semibold text-lg transition-all duration-300;
+    @apply hover:scale-105 hover:shadow-xl;
+  }
+  .new-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.1);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+  }
+
+  .new-button:hover::before {
+      width: 300px;
+      height: 300px;
+  }
+
+  .new-button:active {
+      transform: scale(0.98);
+  }
   .cta-button {
     @apply px-2 py-4 rounded-lg bg-black-200 flex justify-center items-center relative cursor-pointer overflow-hidden;
 

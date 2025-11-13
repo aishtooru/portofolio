@@ -1,7 +1,8 @@
 'use client';
 import { useState, useEffect } from 'react'
-import TitleHeader from '../components/TitleHeader'
-import GlowCard from '../components/GlowCard.jsx';
+import TitleHeader from '@/src/components/TitleHeader';
+import GlowCard from '@/src/components/GlowCard.jsx';
+import NavbarPage from '@/src/components/NavbarPage'
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -9,9 +10,17 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 gsap.registerPlugin(ScrollTrigger);
 
-const Experience = () => {
+interface Experience {
+    company_name: string;
+    icon: string;
+    start_date: Date;
+    end_date: Date;
+    responsibilities: string;
+}
 
-    const [experience, setExperience] = useState([])
+const page = () => {
+
+    const [experience, setExperience] = useState<Experience[]>([])
         
           useEffect(() => {
               const fetchExperience = async () => {
@@ -29,7 +38,7 @@ const Experience = () => {
           }, [])
 
     useGSAP(() => {
-        gsap.utils.toArray('.timeline-card').forEach((card) => {
+        gsap.utils.toArray<HTMLElement>('.timeline-card').forEach((card) => {
             gsap.from(card, {
                 xPercent: -100,
                 opacity: 0,
@@ -58,7 +67,7 @@ const Experience = () => {
             }
         })
 
-        gsap.utils.toArray('.expText').forEach((text) => {
+        gsap.utils.toArray<HTMLElement>('.expText').forEach((text) => {
             gsap.from(text, {
                 xPercent: 0,
                 opacity: 0,
@@ -74,6 +83,8 @@ const Experience = () => {
     }, [experience])
 
   return (
+    <>
+    <NavbarPage />
     <section id='experience' className='w-full md:mt-40 mt-20 section-padding xl:px-0'>
         <div className="w-full h-full md:px-20 px-5">
             <TitleHeader title="Work Experience" sub="💼 My Career Overview"  />
@@ -87,7 +98,7 @@ const Experience = () => {
                             </div>
                             {/* right section */}
 
-                            <div className="xl:w-4/6">
+                            <div className="xl:w-4/6 mb-10">
                                 <div className="flex items-start">
                                     <div className="timeline-wrapper">
                                         <div className='timeline'/>
@@ -129,12 +140,18 @@ const Experience = () => {
                     ))}
                 </div>
             </div>
+            <div className="flex justify-center items-center w-full mt-10 mb-10">
+            <a href="/" className='new-button group'>
+                <span className='relative z-10'>Back to Home</span>
+            </a>
+            </div>
 
 
             
         </div>
     </section>
+    </>
   )
 }
 
-export default Experience
+export default page

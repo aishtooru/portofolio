@@ -1,9 +1,9 @@
 'use client';
 import { useEffect, useState } from 'react'
-import { navLinks } from '@/src/constants/index.js'
+import { navBarLinks } from '@/src/constants/index.js'
 
 
-const Navbar = () => {
+const NavbarPage = () => {
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
@@ -19,13 +19,13 @@ const Navbar = () => {
   return (
     <header className={`navbar ${scrolled ? 'scrolled' : 'not-scrolled'}`}>
         <div className="inner">
-            <a href="#hero" className="logo">
+            <a href="/" className="logo">
                 Cindy Aulia S
             </a>
 
             <nav className="desktop">
                 <ul>
-                    {navLinks.map(({name, link}) => (
+                    {navBarLinks.map(({name, link}) => (
                         <li key={name} className='group'>
                             <a href={link}>
                                 <span>{name}</span>
@@ -47,4 +47,4 @@ const Navbar = () => {
   )
 }
 
-export default Navbar
+export default NavbarPage

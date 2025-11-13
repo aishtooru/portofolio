@@ -11,7 +11,7 @@ import Contact from '@/src/sections/Contact.jsx'
 const page = () => {
   return (
     <>
-        <Navbar/>
+        <Navbar />
         <Hero/>
         <Educations />
         <Showcase/>
