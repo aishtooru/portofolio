@@ -86,16 +86,24 @@ section {
 
   .hero-text {
     @apply flex flex-col justify-center md:text-[40px] text-[20px] font-semibold relative z-10 pointer-events-none;
+     & p,
+    & h2 {
+      @apply opacity-0;
+      transform: translateY(50px);
+    }
     img {
       @apply size-8 md:size-10 object-contain;
     }
-    /* .slide {
-      @apply absolute pt-0 px-2 md:px-5 py-[30px] h-[48px] md:h-[78px] md:translate-y-1 translate-y-0 overflow-hidden;
-    } */
     .slide {
-      @apply absolute pt-0 px-2 md:px-5 h-[30px] md:h-[60px] md:translate-y-1 translate-y-0 overflow-hidden;
+      @apply absolute pt-0 px-2 md:px-3 h-[30px] md:h-[60px] translate-y-0 overflow-hidden;
     }
   }
+  #hero-description,
+  .hero-button {
+    @apply opacity-0;
+    transform: translateY(60px);
+  }
+
 
   .hero-badge {
     @apply bg-black-200 py-2 px-4 rounded-full w-fit text-sm md:text-base text-nowrap;
@@ -359,7 +367,7 @@ section {
 .slide {
   display: inline-block;
   flex-direction: column;
-  /* height: 48px; */
+  height: 48px;
   transition: all cubic-bezier(0.71, 0.03, 0.34, 1);
 }
 
@@ -537,4 +545,5 @@ section {
 
 .card:hover::before {
   opacity: 1;
+  pointer-events: none;
 }

@@ -12,7 +12,6 @@ const Contact = () => {
                   try {
                     const data_contact = await fetch('/api/contact')
                     const response_contact = await data_contact.json()
-                    console.log(response_contact.contact)
                     setContact(response_contact.contact)
                   } catch(error) {
                       console.log(error)

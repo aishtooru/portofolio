@@ -1,13 +1,19 @@
 'use client';
 
 import { useState, useEffect } from 'react'
-import TitleHeader from '../components/TitleHeader'
+import TitleHeader from '@/src/components/TitleHeader'
+import NavbarPage from '@/src/components/NavbarPage';
 import { useGSAP } from '@gsap/react'
 import gsap from 'gsap';
 
-const TechStack = () => {
+interface Skills {
+    name: string;
+    img_path: string;
+}
 
-    const [tech, setTech] = useState([])
+const Page = () => {
+
+    const [tech, setTech] = useState<Skills[]>([])
     
       useEffect(() => {
           const fetcTech = async () => {
@@ -41,12 +47,13 @@ const TechStack = () => {
     
 
   return (
-    <div id="skills" className="flex-center section-padding">
+    <>
+    <NavbarPage />
+    <section className='w-full md:mt-40 mt-20 section-padding xl:px-0'>
+    <div id="skills" className="w-full padding-x-lg mt-20 mb-10">
         <div className='w-full h-full md:px-10 px-5'>
-            <a href="/skills">
-                <TitleHeader title="My Preferred Tech Stack"
-                sub="👩🏻‍💻 The Skills I Bring to the Table" />
-            </a>
+            <TitleHeader title="My Preferred Tech Stack"
+            sub="👩🏻‍💻 The Skills I Bring to the Table" />
 
             <div className="tech-grid">
                 {tech.map((tch) => (
@@ -67,8 +74,15 @@ const TechStack = () => {
             </div>
             
         </div> 
-</div>
+        <div className="flex justify-center items-center w-full mt-10 mb-10">
+            <a href="/" className='new-button group'>
+                <span className='relative z-10'>Back to Home</span>
+            </a>
+        </div>
+    </div>
+    </section>
+</>
   )
 }
 
-export default TechStack
+export default Page

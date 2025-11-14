@@ -1,7 +1,7 @@
 export const navLinks = [
     {
         name: "Projects",
-        link: "#work"
+        link: "#projects"
     },
     {
         name: "Educations",
@@ -19,11 +19,11 @@ export const navLinks = [
 export const navBarLinks = [
     {
         name: "Projects",
-        link: "/"
+        link: "/projects"
     },
     {
         name: "Educations",
-        link: "/"
+        link: "/educations"
     },
     {
         name: "Experience",
@@ -31,6 +31,6 @@ export const navBarLinks = [
     },
     {
         name: "Skills",
-        link: "/"
+        link: "/skills"
     },
 ]

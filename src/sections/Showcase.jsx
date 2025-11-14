@@ -55,7 +55,8 @@ const Showcase = () => {
 
 
   return (
-    <div id='work' ref={sectionRef} className='app-showcase'>
+    <>
+    <div id='projects' ref={sectionRef} className='app-showcase'>
         <div className='w-full'>
             <div className='showcaselayout'>
                 {/* Showcase Items Left*/}
@@ -108,6 +109,13 @@ const Showcase = () => {
             </div>
         </div>
     </div>
+    <div className="flex justify-center items-center w-full mt-10 mb-10">
+        <a href="/projects" className='new-button group'>
+            <span className='relative z-10'>Show More...</span>
+        </a>
+    </div>
+    </>
+    
   )
 }
 

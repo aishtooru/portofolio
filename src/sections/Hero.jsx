@@ -78,6 +78,19 @@ const Hero = () => {
                 ease: 'power2.inOut'
             },
         )
+        .fromTo('.hero-button',
+            {
+                y: 80,
+                opacity: 0
+            },
+            {
+                y: 0,
+                opacity: 1,
+                stagger: 0.5,
+                duration: 1.05,
+                ease: 'power2.inOut'
+            },
+        )
     }, [biodata, roles])
 
     
@@ -101,13 +114,13 @@ const Hero = () => {
                         <h2> I'm {biodata.name} </h2>
                         <h2>A
                             <span className='slide'>
-                            <span className='wrapper'>
-                            {roles.map((role) => (
-                                <span key={role.title} className='flex items-center md:gap-2 gap-1 pb-2'>
-                                {role.title}
+                                <span className='wrapper'>
+                                {roles.map((role) => (
+                                    <span key={role.title} className='flex items-center md:gap-2 gap-1'>
+                                    {role.title}
+                                    </span>
+                                ))}
                                 </span>
-                            ))}
-                            </span>
                         </span>
                         </h2>
                     </div>
@@ -117,7 +130,7 @@ const Hero = () => {
                     </>
                     )}
                     
-                    <Button className="md:w-80 md:h-16 w-60 h-12"
+                    <Button className="md:w-80 md:h-16 w-60 h-12 hero-button"
                     id="button" text="See my work" />
 
                 </div>

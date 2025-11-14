@@ -1,8 +1,9 @@
 'use client';
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import TitleHeader from '@/src/components/TitleHeader';
 import GlowCard from '@/src/components/GlowCard.jsx';
 import NavbarPage from '@/src/components/NavbarPage'
+import { useSearchParams } from "next/navigation";
 import { gsap } from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -13,6 +14,7 @@ gsap.registerPlugin(ScrollTrigger);
 interface Experience {
     company_name: string;
     icon: string;
+    position: string;
     start_date: Date;
     end_date: Date;
     responsibilities: string;
@@ -21,23 +23,41 @@ interface Experience {
 const page = () => {
 
     const [experience, setExperience] = useState<Experience[]>([])
+    const params = useSearchParams();
+    const from = params.get("from");
+
+
+    useEffect(() => {
+        if (typeof window === "undefined") return;
+
+        const hasReloaded = sessionStorage.getItem("exp_reloaded");
+
+        // Jika datang dari home → JANGAN reload
+        if (from === "home") return;
+
+        // Jika belum pernah reload → reload sekali
+        if (!hasReloaded) {
+            sessionStorage.setItem("exp_reloaded", "yes");
+            window.location.reload();
+        }
+    }, [from]);
+
+    useEffect(() => {
+        const fetchExperience = async () => {
+            try {
+                const data_experience = await fetch('/api/experience')
+                const response_experience = await data_experience.json()
+                setExperience(response_experience.experience)
+            } catch(error) {
+                console.log(error)
+            }
+        }
         
-          useEffect(() => {
-              const fetchExperience = async () => {
-                  try {
-                    const data_experience = await fetch('/api/experience')
-                    const response_experience = await data_experience.json()
-                    console.log(response_experience.experience)
-                    setExperience(response_experience.experience)
-                  } catch(error) {
-                      console.log(error)
-                  }
-              }
-        
-            fetchExperience()
-          }, [])
+        fetchExperience()
+    }, [])
 
     useGSAP(() => {
+
         gsap.utils.toArray<HTMLElement>('.timeline-card').forEach((card) => {
             gsap.from(card, {
                 xPercent: -100,
@@ -79,8 +99,16 @@ const page = () => {
                 }
             })
         })
+        ScrollTrigger.refresh()
 
-    }, [experience])
+    },  [experience] )
+
+    useEffect(() => {
+    return () => {
+        sessionStorage.removeItem("exp_reloaded");
+    };
+    }, []);
+
 
   return (
     <>
@@ -101,8 +129,8 @@ const page = () => {
                             <div className="xl:w-4/6 mb-10">
                                 <div className="flex items-start">
                                     <div className="timeline-wrapper">
-                                        <div className='timeline'/>
-                                        <div className='gradient-line w-1 h-full'/>
+                                        <div className='timeline'></div>
+                                        <div className='gradient-line w-1 h-full'></div>
                                     </div>
 
                                     <div className='expText flex xl:gap-20 md:gap-10 gap-5 relative z-20'>
@@ -111,8 +139,11 @@ const page = () => {
                                         </div>
                                         <div>
                                             <h1 className='font-semibold text-3xl'>
-                                                {card.company_name}
+                                                {card.position}
                                             </h1>
+                                            <h2 className='font-semibold text-xl'>
+                                                {card.company_name}
+                                            </h2>
                                             <p className='my-5 text-white-50'>
                                                 📅 {new Date(card.start_date).toLocaleString('en-US', { month: 'long', year: 'numeric' })} - {card.end_date ? new Date(card.end_date).toLocaleString('en-US', { month: 'long', year: 'numeric' }) : 'Present'}
                                             </p>

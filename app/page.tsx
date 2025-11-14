@@ -9,6 +9,7 @@ import Educations from '@/src/sections/Educations.jsx'
 import Contact from '@/src/sections/Contact.jsx'
 
 const page = () => {
+  
   return (
     <>
         <Navbar />

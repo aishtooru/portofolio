@@ -1,20 +1,42 @@
 'use client';
-import { useEffect, useState } from 'react'
+import { useState, useEffect } from 'react'
+import { usePathname, useRouter } from 'next/navigation'
 import { navBarLinks } from '@/src/constants/index.js'
 
 
 const NavbarPage = () => {
+    const pathname = usePathname()
+    const router = useRouter()
     const [scrolled, setScrolled] = useState(false);
 
     useEffect(() => {
-        const handleScroll = () => {
-            const isScrolled = window.scrollY > 10;
-            setScrolled(isScrolled);
-        }
-        window.addEventListener('scroll', handleScroll);
+            const handleScroll = () => {
+                const isScrolled = window.scrollY > 10;
+                setScrolled(isScrolled);
+            }
+            window.addEventListener('scroll', handleScroll);
+    
+                return () => window.removeEventListener('scroll', handleScroll);
+        }, [])
 
-            return () => window.removeEventListener('scroll', handleScroll);
-    }, [])
+    const handleNavClick = (e, link) => {
+        e.preventDefault()
+        
+        if (link.startsWith('#')) {
+            if (pathname !== '/') {
+                router.push('/' + link)
+                setTimeout(() => {
+                    const element = document.querySelector(link)
+                    element?.scrollIntoView({ behavior: 'smooth' })
+                }, 100)
+            } else {
+                const element = document.querySelector(link)
+                element?.scrollIntoView({ behavior: 'smooth' })
+            }
+        } else {
+            router.push(link)
+        }
+    }
 
   return (
     <header className={`navbar ${scrolled ? 'scrolled' : 'not-scrolled'}`}>
@@ -26,13 +48,13 @@ const NavbarPage = () => {
             <nav className="desktop">
                 <ul>
                     {navBarLinks.map(({name, link}) => (
-                        <li key={name} className='group'>
-                            <a href={link}>
-                                <span>{name}</span>
-                                <span className='underline'></span>
-                            </a>
-                        </li>
-                    ))}
+                    <li key={name} className='group'>
+                        <a href={link} onClick={(e) => handleNavClick(e, link)}>
+                        <span>{name}</span>
+                        <span className='underline'></span>
+                        </a>
+                    </li>
+                        ))}
                 </ul>
             </nav>
 

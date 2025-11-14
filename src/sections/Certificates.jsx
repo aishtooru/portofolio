@@ -1,6 +1,5 @@
 "use client"
 import { useState, useEffect } from 'react'
-import Button from '../components/Button.jsx';
 import TitleHeader from '../components/TitleHeader.jsx'
 
 const Certificates = () => {
@@ -11,7 +10,6 @@ const Certificates = () => {
               try {
                 const data_certificate = await fetch('/api/certificate')
                 const response_certificate = await data_certificate.json()
-                console.log(response_certificate.certificate)
                 setCertificate(response_certificate.certificate)
               } catch(error) {
                   console.log(error)
@@ -22,7 +20,7 @@ const Certificates = () => {
       }, [])
 
   return (
-    <div className="w-full padding-x-lg">
+    <div id='certificate' className="w-full padding-x-lg mt-30">
         <TitleHeader title="Certificate"
                     sub="🎓 Achieving" />
         <div className="mx-auto grid-3-cols">

@@ -38,7 +38,8 @@ const Experience = () => {
                 ease: 'power2.inOut',
                 scrollTrigger: {
                     trigger: card,
-                    start: 'top 80%'
+                    start: 'top 80%',
+                    once: true
                 }
             })
         })
@@ -76,8 +77,9 @@ const Experience = () => {
   return (
     <section id='experience' className='w-full md:mt-40 mt-20 section-padding xl:px-0'>
         <div className="w-full h-full md:px-20 px-5">
-            <TitleHeader title="Work Experience" sub="💼 My Career Overview"  />
-
+            <a href="/experiences?from=home">
+                <TitleHeader title="Work Experience" sub="💼 My Career Overview"  />
+            </a>
             <div className="mt-32 relative">
                 <div className="relative z-50 xl:space-y-32 space-y-10">
                     {experience.map((card, index) => (
@@ -100,8 +102,11 @@ const Experience = () => {
                                         </div>
                                         <div>
                                             <h1 className='font-semibold text-3xl'>
-                                                {card.company_name}
+                                                {card.position}
                                             </h1>
+                                            <h2 className='font-semibold text-xl'>
+                                                {card.company_name}
+                                            </h2>
                                             <p className='my-5 text-white-50'>
                                                 📅 {new Date(card.start_date).toLocaleString('en-US', { month: 'long', year: 'numeric' })} - {card.end_date ? new Date(card.end_date).toLocaleString('en-US', { month: 'long', year: 'numeric' }) : 'Present'}
                                             </p>

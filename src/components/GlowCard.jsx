@@ -2,6 +2,7 @@
 import React from 'react'
 import { useRef } from 'react';
 
+
 const GlowCard = ({ card, children = null, index } ) => {
     const cardRefs = useRef([]);
 
